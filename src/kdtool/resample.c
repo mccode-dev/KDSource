@@ -16,12 +16,13 @@ void display_usage() {
   printf("\t-o outfile: Name of MCPL file with new samples\n");
   printf("\t            (default: \"resampled.mcpl\").\n");
   printf("\t-n N:       Number of new samples (default: 1E5).\n");
-  printf("\t-s SEED:    Seed for RNG (defaul: current time).\n");
+  printf("\t-s SEED:    Seed for RNG (default: current time).\n");
   printf("\t-h, --help: Display usage instructions.\n");
 }
 
 int resample_parse_args(int argc, char **argv, const char **filename,
-                        const char **outfilename, long int *N, unsigned int *seed) {
+                        const char **outfilename, long int *N,
+                        unsigned int *seed) {
   *filename = 0;
   *outfilename = 0;
   *N = 1E5;
