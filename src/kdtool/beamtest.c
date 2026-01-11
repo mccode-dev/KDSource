@@ -4,7 +4,7 @@
 
 #include <math.h>
 
-#include "kdsource.h"
+#include "kdsource/kdsource.h"
 
 void display_usage() {
   printf("Usage: kdtool beamtest sourcefile [options]\n\n");

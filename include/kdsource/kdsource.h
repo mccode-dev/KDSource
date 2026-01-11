@@ -26,9 +26,9 @@
 #include "mcpl.h"
 
 #include "KDSourceConfig.h"
-#include "geom.h"
-#include "plist.h"
-#include "utils.h"
+#include "kdsource/utils.h"
+#include "kdsource/geom.h"
+#include "kdsource/plist.h"
 
 #define MAX_RESAMPLES 1000000
 #define NAME_MAX_LEN 256

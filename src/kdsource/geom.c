@@ -4,7 +4,7 @@
 
 #include <math.h>
 
-#include "kdsource.h"
+#include "kdsource/kdsource.h"
 
 void KDS_error(const char *msg);
 void KDS_end(const char *msg);

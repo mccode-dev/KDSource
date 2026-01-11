@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "kdsource.h"
+#include "kdsource/kdsource.h"
 
 // Sample with normal distribution (x0=0, s=1)
 double rand_norm() {

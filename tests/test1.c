@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<assert.h>
 
-#include "kdsource.h"
+#include "kdsource/kdsource.h"
 
 void test_test(){
 	printf("C tests still not implemented.\n");

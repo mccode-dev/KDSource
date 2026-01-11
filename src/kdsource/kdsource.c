@@ -5,7 +5,7 @@
 #include <libxml/parser.h>
 #include <math.h>
 
-#include "kdsource.h"
+#include "kdsource/kdsource.h"
 
 void KDS_error(const char *msg) {
   printf("KDSource error: %s\n", msg);
