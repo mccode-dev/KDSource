@@ -9,7 +9,7 @@
 #                                                                                #
 ##################################################################################
 
-cmake_minimum_required(VERSION 3.5.0)
+cmake_minimum_required(VERSION 3.10.0)
 
 project(KDSource VERSION 0.1.0)
 configure_file(include/kdsource/KDSourceConfig.h.in KDSourceConfig.h)
@@ -27,7 +27,7 @@ set(INC "${PROJECT_SOURCE_DIR}/include")
 find_package(LibXml2 REQUIRED)
 
 set(BUILD_WITHG4 OFF CACHE STRING "Whether to build Geant4 plugins if Geant4 is available.")
-add_subdirectory(mcpl)
+#add_subdirectory(mcpl)
 
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 
