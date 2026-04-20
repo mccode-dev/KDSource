@@ -1,0 +1,16 @@
+PKWI conda install notes:
+
+1) Build in a conda-env using
+mkdir build && cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX
+make
+make install
+cd ..
+
+2) Add various python dependencies
+micromamba install kdepy joblib scikit-learn -y
+
+3) Build the python bindings
+cd python
+python setup.py install
+(pip install . does not really function??)
