@@ -8,9 +8,9 @@ make install
 cd ..
 
 2) Add various python dependencies
-micromamba install kdepy joblib scikit-learn -y
+micromamba install kdepy joblib scikit-learn astropy numpy -y
 
 3) Build the python bindings
 cd python
-python setup.py install
-(pip install . does not really function??)
+pip install .
+
