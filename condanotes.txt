@@ -12,5 +12,5 @@ micromamba install kdepy joblib scikit-learn astropy numpy -y
 
 3) Build the python bindings
 cd python
-pip install .
+pip install . --no-deps
 
