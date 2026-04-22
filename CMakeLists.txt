@@ -9,15 +9,15 @@
 #                                                                                #
 ##################################################################################
 
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.17.0)
 
 project(KDSource VERSION 0.1.0)
 configure_file(include/kdsource/KDSourceConfig.h.in KDSourceConfig.h)
 
 enable_testing()
 
-set(INSTALL_PY OFF CACHE STRING "Whether to also install kdsource and mcpl python files.")
-
+option(INSTALL_PY "Whether to also install kdsource python files." ON)
+option(BUILD_WITHG4 "Whether to build Geant4 plugins if Geant4 is available." OFF)
 
 set(CMAKE_C_STANDARD 99)
 
@@ -26,13 +26,12 @@ set(INC "${PROJECT_SOURCE_DIR}/include")
 
 find_package(LibXml2 REQUIRED)
 
-set(BUILD_WITHG4 OFF CACHE STRING "Whether to build Geant4 plugins if Geant4 is available.")
-#add_subdirectory(mcpl)
 
-set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 
+include(GNUInstallDirs)
 # Set installation paths
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+
 set(KDSource_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/KDSource")
 set(KDSource_BINDIR "${CMAKE_INSTALL_BINDIR}")
 set(KDSource_LIBDIR "${CMAKE_INSTALL_LIBDIR}")
@@ -40,6 +39,13 @@ set(KDSource_INCDIR "${CMAKE_INSTALL_INCLUDEDIR}")
 
 # Install destination setting
 set(INSTDEST "RUNTIME;DESTINATION;${KDSource_BINDIR};LIBRARY;DESTINATION;${KDSource_LIBDIR};ARCHIVE;DESTINATION;${KDSource_LIBDIR}")
+
+message(STATUS "Configuring for installation in ${CMAKE_INSTALL_PREFIX}")
+message(STATUS "CMAKE_INSTALL_RPATH is ${CMAKE_INSTALL_RPATH}")
+message(STATUS "KDSource_CMAKEDIR is ${KDSource_CMAKEDIR}")
+message(STATUS "KDSource_BINDIR is ${KDSource_BINDIR}")
+message(STATUS "KDSource_LIBDIR is ${KDSource_LIBDIR}")
+message(STATUS "KDSource_INCDIR is ${KDSource_INCDIR}")
 
 # Define kdsource shared library and sources
 add_library(kdsource SHARED "${SRC}/kdsource/kdsource.c"
@@ -84,7 +90,7 @@ add_executable(kdtool-resample "${SRC}/kdtool/resample.c")
 add_executable(kdtool-beamtest "${SRC}/kdtool/beamtest.c")
 target_link_libraries(kdtool-resample PUBLIC kdsource)
 target_link_libraries(kdtool-beamtest PUBLIC kdsource)
-install(TARGETS kdtool-resample kdtool-beamtest ${INSTDEST} )
+install(TARGETS kdtool-resample kdtool-beamtest DESTINATION ${KDSource_CMAKEDIR} )
 
 add_library(ptracmcpl SHARED "${SRC}/mcnpptrac/ptracmcpl.c" "${SRC}/mcnpptrac/ptracread.c")
 target_include_directories(ptracmcpl PUBLIC "${SRC}/mcnpptrac")
@@ -98,7 +104,7 @@ if (binaryprops)
   set_target_properties(ptracmcpl PROPERTIES ${binaryprops})
   set_target_properties(ptrac2mcpl PROPERTIES ${binaryprops})
 endif()
-install(TARGETS ptrac2mcpl ptracmcpl ${INSTDEST})
+install(TARGETS ptrac2mcpl ptracmcpl DESTINATION ${KDSource_CMAKEDIR})
 if (BUILD_EXAMPLES)
   install(FILES "${SRCEX}/example_mcnpptrac.ptrac" DESTINATION examples)
 endif()
@@ -115,7 +121,7 @@ if (binaryprops)
   set_target_properties(stockmcpl PROPERTIES ${binaryprops})
   set_target_properties(stock2mcpl PROPERTIES ${binaryprops})
 endif()
-install(TARGETS stock2mcpl stockmcpl ${INSTDEST})
+install(TARGETS stock2mcpl stockmcpl DESTINATION ${KDSource_CMAKEDIR})
 if (BUILD_EXAMPLES)
   install(FILES "${SRCEX}/example_tripolistock.stock" DESTINATION examples)
 endif()
@@ -135,7 +141,7 @@ if (binaryprops)
   set_target_properties(ssv2mcpl PROPERTIES ${binaryprops})
   set_target_properties(mcpl2ssv PROPERTIES ${binaryprops})
 endif()
-install(TARGETS ssv2mcpl mcpl2ssv ssvmcpl ${INSTDEST})
+install(TARGETS ssv2mcpl mcpl2ssv ssvmcpl DESTINATION ${INSTDEST})
 if (BUILD_EXAMPLES)
   install(FILES "${SRCEX}/example_ascii.ssv" "${SRCEX}/example_writessv.ipynb" DESTINATION examples)
 endif()
